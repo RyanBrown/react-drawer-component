@@ -1,0 +1,180 @@
+@import '../../styles/global';
+
+
+$white: #fff;
+$black: #000;
+
+$drawer-transition-speed: 500ms;
+$drawer-box-shadow: 0 0 1rem rgba($black, 0.15) !default;
+
+@include transition( transform $drawer-transition-speed, box-shadow $drawer-transition-speed);
+@include box-shadow($drawer-box-shadow);
+@include transition(all ease-in-out $drawer-transition-speed);
+
+$font-family-base: sans-serif;
+$zindex-modal: 1060;
+$zindex-modal-backdrop: rgba(0,0,0,.5);
+
+$drawer-content-bg: goldenrod;
+$drawer-content-color: lightblue;
+$drawer-content-spacer-x: 2rem;
+$card-spacer-y: 1rem;
+$card-cap-color: red;
+$card-cap-bg: yellow;
+$card-border-width: 5px;
+$card-border-color: green;
+
+
+// Prevent Body scrolling when drawer is active
+.noscroll {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drawer {
+  @include transition(
+    transform $drawer-transition-speed,
+    box-shadow $drawer-transition-speed
+  );
+  background-clip: border-box;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: $font-family-base;
+  height: 100%;
+  min-width: 0;
+  overflow: auto;
+  position: fixed;
+  will-change: transform;
+  word-wrap: break-word;
+  z-index: $zindex-modal;
+
+  &.open {
+    @include box-shadow($drawer-box-shadow);
+  }
+
+  &.light {
+    background-color: $white;
+  }
+
+  &.dark {
+    background-color: $black;
+    color: $white;
+  }
+
+  &.top {
+    height: 50vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
+    width: 100vw;
+
+    &.open {
+      transform: translateY(0%);
+    }
+  }
+
+  &.right {
+    bottom: 0;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    width: 50vw;
+
+    &.open {
+      transform: translateX(0%);
+    }
+  }
+
+  &.bottom {
+    bottom: 0;
+    height: 50vh;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+    width: 100vw;
+
+    &.open {
+      transform: translateY(0%);
+    }
+  }
+
+  &.left {
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    width: 50vw;
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}
+
+.backdrop {
+  @include transition(all ease-in-out $drawer-transition-speed);
+  background-color: rgba($black, 0.5);
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: $zindex-modal-backdrop;
+}
+
+$drawer-content-bg: $white;
+$drawer-content-color: $black;
+
+$drawer-content-spacer-x: 1rem;
+
+.DrawerContent {
+  background-clip: border-box;
+  background-color: $drawer-content-bg;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  min-width: 0;
+  word-wrap: break-word;
+
+  &.light {
+    background-color: $white;
+  }
+
+  &.dark {
+    background-color: $black;
+    color: $white;
+  }
+
+  header {
+    flex: 0 0 auto;
+    padding: $drawer-content-spacer-x;
+
+    padding: $card-spacer-y $drawer-content-spacer-x;
+    margin-bottom: 0; /* Removes the default margin-bottom of <hN> */
+    color: $card-cap-color;
+    background-color: $card-cap-bg;
+    border-bottom: $card-border-width solid $card-border-color;
+  }
+
+  .drawer-body {
+    color: $drawer-content-color;
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: $drawer-content-spacer-x;
+  }
+
+  footer.drawer-footer {
+    background-color: $card-cap-bg;
+    border-top: $card-border-width solid $card-border-color;
+    flex: 0 0 auto;
+    padding: $drawer-content-spacer-x;
+    padding: $card-spacer-y $drawer-content-spacer-x;
+  }
+}
