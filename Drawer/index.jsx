@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import DrawerContent from './DrawerContent';
+
 import styles from './styles.scss';
 
 const propTypes = {
@@ -63,5 +65,7 @@ class Drawer extends React.Component {
 Drawer.displayName = 'Drawer';
 Drawer.propTypes = propTypes;
 Drawer.defaultProps = defaultProps;
+
+Drawer.Content = DrawerContent
 
 export default Drawer;
